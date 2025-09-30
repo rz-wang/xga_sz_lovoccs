@@ -3048,10 +3048,13 @@ class AnnularSpectra(BaseAggregateProduct):
         # Display the spectrum
 
         if anything_plotted:
-            plt.show()
+            fig = plt.gcf()
+            return fig, ax
         else:
             warnings.warn("There are no {m} XSPEC fits associated with this AnnularSpectra, so you can't view "
                           "it".format(m=model))
+            
+            return None, None
 
         # Wipe the figure
         plt.close("all")
