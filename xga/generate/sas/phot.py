@@ -114,9 +114,9 @@ def evselect_image(sources: Union[BaseSource, NullSource, BaseSample], lo_en: Qu
                 rmtree(dest_dir)
 
             os.makedirs(dest_dir)
-            cmds.append("cd {d};evselect table={e} imageset={i} xcolumn=X ycolumn=Y ximagebinsize=87 "
-                        "yimagebinsize=87 squarepixels=yes ximagesize=512 yimagesize=512 imagebinning=binSize "
-                        "ximagemin=3649 ximagemax=48106 withxranges=yes yimagemin=3649 yimagemax=48106 "
+            cmds.append("cd {d};evselect table={e} imageset={i} xcolumn=X ycolumn=Y "
+                        "squarepixels=yes ximagesize=900 yimagesize=900 imagebinning=imageSize "
+                        "ximagemin=3401 ximagemax=3401 withxranges=yes yimagemin=3649 yimagemax=48400 "
                         "withyranges=yes {ex}; mv * ../; cd ..; rm -r {d}".format(d=dest_dir, e=evt_list.path,
                                                                                   i=im, ex=expr))
 
@@ -524,7 +524,7 @@ def psfgen(sources: Union[BaseSource, BaseSample], bins: int = 4, psf_model: str
                                                   "images before PSFs".format(o=obs_id, i=inst))
 
                 # Checking if the Image products are the same shape that XGA makes
-                res_match = [im for im in images if im.shape == (512, 512)]
+                res_match = [im for im in images if im.shape == (900, 900)]
                 if len(res_match) == 0:
                     raise NoProductAvailableError("There is an image associated with {o} {i}, but it doesn't"
                                                   " appear to be at the resolution XGA uses - this is not "
